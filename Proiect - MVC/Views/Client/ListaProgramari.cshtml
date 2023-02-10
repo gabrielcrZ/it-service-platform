@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Proiect___MVC.DAL.Programare>
+
+@{
+    ViewBag.Title = "ListaProgramari";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<h3>Lista Programari</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Ora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rezolvat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Serviciu.Descriere)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Ora)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rezolvat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Serviciu.Descriere)
+        </td>
+        <td>
+            @using (@Html.BeginForm("AnuleazaProgramare", "Client", new { cod_programare = item.id }))
+                {
+                    <input type="submit" class="btn btn-danger" value="Anuleaza" onclick="return confirm('Sunteti sigur ca doriti sa anulati programarea?');" />
+                }
+            
+        </td>
+    </tr>
+}
+
+</table>

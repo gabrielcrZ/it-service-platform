@@ -1,0 +1,28 @@
+﻿@if (Session["user_name"] != null && Session["user_rol"].Equals(2))
+{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+else if (Session["user_name"] != null && Session["user_rol"].Equals(1))
+{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutTehnician.cshtml";
+}
+else
+{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<address>
+    Str. Bradutului 5B <br />
+    Sovata, Mehedinti, CP 820481<br />
+    <abbr title="Phone">P:</abbr>
+    0213 907 291
+</address>
+
+<address>
+    <strong>Intrebari si asistenta:</strong>   <a href="mailto:exemplumail@gmail.com">exemplumail@gmail.com</a><br />
+</address>

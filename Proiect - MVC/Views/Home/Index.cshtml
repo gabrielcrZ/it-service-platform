@@ -1,0 +1,30 @@
+﻿@if (Session["user_name"] != null && Session["user_rol"].Equals(2))
+{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+} else if (Session["user_name"] != null && Session["user_rol"].Equals(1))
+{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutTehnician.cshtml";
+} else
+{
+    ViewBag.Title = "Home page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Informatii generale</h3>
+<p>- Proiectul reprezinta o platforma pentru un service de reparat laptopuri/calculatoare</p>
+<p>- Platforma asigura urmatoarele facilitati:</p>
+<strong>Pentru clienti:</strong>
+<ul>
+    <li>Crearea unui cont pe platforma.</li>
+    <li>Vizualizarea serviciilor la care poate apela.</li>
+    <li>Crearea unei programari pentru a-si aduce calculatorul/laptopul in service.</li>
+    <li>Vizualizarea programarilor si posibilitatea anularii acestora.</li>
+</ul>
+<strong>Pentru tehnicieni:</strong>
+<ul>
+    <li>Gestiunea clientilor, tehnicienilor si userilor existenti in baza de date.</li>
+    <li>Gestiunea serviciilor si categoriilor de servicii.</li>
+    <li>Gestiunea programarilor, modificarea acestora (statusul) si anularea acestora.</li>
+</ul>

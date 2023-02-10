@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Proiect___MVC.DAL.Serviciu>
+
+@{
+    ViewBag.Title = "ListaServicii";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<h3>Servicii</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descriere)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategorieServiciu.Categorie)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descriere)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategorieServiciu.Categorie)
+        </td>
+
+    </tr>
+}
+
+</table>

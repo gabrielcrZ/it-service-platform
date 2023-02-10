@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CategorieServiciu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Categorie" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Serviciu" Relationship="Self.FK_Serviciu_CategorieServiciu" FromRole="CategorieServiciu" ToRole="Serviciu" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_Utilizator" Type="Int32" />
+    <NavigationProperty Name="Utilizator" Relationship="Self.FK_Client_Utilizator" FromRole="Client" ToRole="Utilizator" />
+    <NavigationProperty Name="Programare" Relationship="Self.FK_Programare_Client" FromRole="Client" ToRole="Programare" />
+  </EntityType>
+  <EntityType Name="Programare">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Data_Ora" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="id_Serviciu" Type="Int32" />
+    <Property Name="id_Client" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Programare_Client" FromRole="Programare" ToRole="Client" />
+    <NavigationProperty Name="Serviciu" Relationship="Self.FK_Programare_Serviciu" FromRole="Programare" ToRole="Serviciu" />
+    <Property Name="Rezolvat" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rol1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descriere" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Utilizator" Relationship="Self.FK_Utilizator_Rol" FromRole="Rol" ToRole="Utilizator" />
+  </EntityType>
+  <EntityType Name="Serviciu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descriere" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_Categorie" Type="Int32" />
+    <NavigationProperty Name="CategorieServiciu" Relationship="Self.FK_Serviciu_CategorieServiciu" FromRole="Serviciu" ToRole="CategorieServiciu" />
+    <NavigationProperty Name="Programare" Relationship="Self.FK_Programare_Serviciu" FromRole="Serviciu" ToRole="Programare" />
+  </EntityType>
+  <EntityType Name="Tehnician">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nume" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Functie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_Utilizator" Type="Int32" />
+    <NavigationProperty Name="Utilizator" Relationship="Self.FK_Tehnician_Utilizator" FromRole="Tehnician" ToRole="Utilizator" />
+  </EntityType>
+  <EntityType Name="Utilizator">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nume_utilizator" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="parola" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_Rol" Type="Int32" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_Client_Utilizator" FromRole="Utilizator" ToRole="Client" />
+    <NavigationProperty Name="Rol" Relationship="Self.FK_Utilizator_Rol" FromRole="Utilizator" ToRole="Rol" />
+    <NavigationProperty Name="Tehnician" Relationship="Self.FK_Tehnician_Utilizator" FromRole="Utilizator" ToRole="Tehnician" />
+  </EntityType>
+  <Association Name="FK_Serviciu_CategorieServiciu">
+    <End Role="CategorieServiciu" Type="Self.CategorieServiciu" Multiplicity="0..1" />
+    <End Role="Serviciu" Type="Self.Serviciu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CategorieServiciu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Serviciu">
+        <PropertyRef Name="id_Categorie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Client_Utilizator">
+    <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="0..1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilizator">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="id_Utilizator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Programare_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+    <End Role="Programare" Type="Self.Programare" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Programare">
+        <PropertyRef Name="id_Client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Programare_Serviciu">
+    <End Role="Serviciu" Type="Self.Serviciu" Multiplicity="0..1" />
+    <End Role="Programare" Type="Self.Programare" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Serviciu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Programare">
+        <PropertyRef Name="id_Serviciu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Utilizator_Rol">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+    <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Utilizator">
+        <PropertyRef Name="id_Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tehnician_Utilizator">
+    <End Role="Utilizator" Type="Self.Utilizator" Multiplicity="0..1" />
+    <End Role="Tehnician" Type="Self.Tehnician" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilizator">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Tehnician">
+        <PropertyRef Name="id_Utilizator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CategorieServiciu" EntityType="Self.CategorieServiciu" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Programare" EntityType="Self.Programare" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" />
+    <EntitySet Name="Serviciu" EntityType="Self.Serviciu" />
+    <EntitySet Name="Tehnician" EntityType="Self.Tehnician" />
+    <EntitySet Name="Utilizator" EntityType="Self.Utilizator" />
+    <AssociationSet Name="FK_Serviciu_CategorieServiciu" Association="Self.FK_Serviciu_CategorieServiciu">
+      <End Role="CategorieServiciu" EntitySet="CategorieServiciu" />
+      <End Role="Serviciu" EntitySet="Serviciu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Client_Utilizator" Association="Self.FK_Client_Utilizator">
+      <End Role="Utilizator" EntitySet="Utilizator" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Programare_Client" Association="Self.FK_Programare_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="Programare" EntitySet="Programare" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Programare_Serviciu" Association="Self.FK_Programare_Serviciu">
+      <End Role="Serviciu" EntitySet="Serviciu" />
+      <End Role="Programare" EntitySet="Programare" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Utilizator_Rol" Association="Self.FK_Utilizator_Rol">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Utilizator" EntitySet="Utilizator" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tehnician_Utilizator" Association="Self.FK_Tehnician_Utilizator">
+      <End Role="Utilizator" EntitySet="Utilizator" />
+      <End Role="Tehnician" EntitySet="Tehnician" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_ModelStoreContainer" CdmEntityContainer="BD_Entities">
+    <EntitySetMapping Name="CategorieServiciu">
+      <EntityTypeMapping TypeName="BD_Model.CategorieServiciu">
+        <MappingFragment StoreEntitySet="CategorieServiciu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Categorie" ColumnName="Categorie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="BD_Model.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="id_Utilizator" ColumnName="id_Utilizator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Programare">
+      <EntityTypeMapping TypeName="BD_Model.Programare">
+        <MappingFragment StoreEntitySet="Programare">
+          <ScalarProperty Name="Rezolvat" ColumnName="Rezolvat" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Data_Ora" ColumnName="Data/Ora" />
+          <ScalarProperty Name="id_Serviciu" ColumnName="id_Serviciu" />
+          <ScalarProperty Name="id_Client" ColumnName="id_Client" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rol">
+      <EntityTypeMapping TypeName="BD_Model.Rol">
+        <MappingFragment StoreEntitySet="Rol">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Rol1" ColumnName="Rol" />
+          <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Serviciu">
+      <EntityTypeMapping TypeName="BD_Model.Serviciu">
+        <MappingFragment StoreEntitySet="Serviciu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Descriere" ColumnName="Descriere" />
+          <ScalarProperty Name="id_Categorie" ColumnName="id_Categorie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tehnician">
+      <EntityTypeMapping TypeName="BD_Model.Tehnician">
+        <MappingFragment StoreEntitySet="Tehnician">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nume" ColumnName="Nume" />
+          <ScalarProperty Name="Functie" ColumnName="Functie" />
+          <ScalarProperty Name="id_Utilizator" ColumnName="id_Utilizator" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilizator">
+      <EntityTypeMapping TypeName="BD_Model.Utilizator">
+        <MappingFragment StoreEntitySet="Utilizator">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="nume_utilizator" ColumnName="nume_utilizator" />
+          <ScalarProperty Name="parola" ColumnName="parola" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id_Rol" ColumnName="id_Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

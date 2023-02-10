@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Proiect___MVC.DAL.CategorieServiciu>
+
+@{
+    ViewBag.Title = "ListaCategorii";
+    Layout = "~/Views/Shared/_LayoutTehnician.cshtml";
+}
+
+<h3>ListaCategorii</h3>
+
+<p>
+    @Html.ActionLink("Adauga", "AdaugaCategorie")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categorie)
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categorie)
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "ModificaCategorie", new { cod_categorie =item.id }, new {@class = "btn btn-info"}) 
+        </td>
+        <td>
+            @using (@Html.BeginForm("StergeCategorie", "Tehnician", new { cod_categorie = item.id}))
+            {
+                <input type="submit" class="btn btn-danger" value="Sterge" onclick="return confirm('Stergeti Categoria?');" />
+            }
+        </td>
+    </tr>
+}
+
+</table>

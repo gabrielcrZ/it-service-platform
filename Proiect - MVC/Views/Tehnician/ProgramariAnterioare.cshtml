@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Proiect___MVC.DAL.Programare>
+
+@{
+    ViewBag.Title = "ProgramariAnterioare";
+    Layout = "~/Views/Shared/_LayoutTehnician.cshtml";
+}
+
+<h3>Programari Anterioare</h3>
+@using (Html.BeginForm("ProgramariAnterioare", "Tehnician", FormMethod.Get))
+{
+    <text>Cauta dupa client</text>
+    <input type="text" name="nume_client" />
+    <input type="submit" class="btn btn-info" value="Cauta" />
+}
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Client.Nume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Ora)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Serviciu.Descriere)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rezolvat)
+        </th>
+        <th>
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Nume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_Ora)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serviciu.Descriere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rezolvat)
+            </td>
+            <td>
+                @Html.ActionLink("Modifica", "ModificaProgramare", new { cod_programare = item.id }, new {@class= "btn btn-info"})
+                
+            </td>
+            <td>
+                @using (@Html.BeginForm("StergeProgramarea", "Tehnician", new { cod_programare = item.id }))
+                {
+                    <input type="submit" class="btn btn-danger" value="Sterge" onclick="return confirm('Stergeti programarea?');" />
+                } 
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Inapoi", "ListaProgramari")
+</div>

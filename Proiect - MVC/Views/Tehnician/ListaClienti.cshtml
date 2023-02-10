@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Proiect___MVC.DAL.Client>
+
+@{
+    ViewBag.Title = "ListaClienti";
+    Layout = "~/Views/Shared/_LayoutTehnician.cshtml"; 
+}
+
+<h3>Lista Clienti</h3>
+@using (Html.BeginForm("ListaClienti", "Tehnician", FormMethod.Get))
+{
+    <text>Cauta dupa denumire</text>
+    <input type="text" name="nume_client" />
+    <input type="submit" class="btn btn-info" value="Cauta" />
+}
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilizator.nume_utilizator)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilizator.parola)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilizator.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Utilizator.Rol.Rol1)
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nume)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Utilizator.nume_utilizator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Utilizator.parola)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Utilizator.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Utilizator.Rol.Rol1)
+            </td>
+            <td>
+                @Html.ActionLink("Modifica", "ModificaClient", new { cod_client = item.id }, new { @class = "btn btn-info" })
+            </td>
+            <td>
+                @Html.ActionLink("Utilizator", "ModificaUtilizator", new { cod_client = item.id }, new { @class = "btn btn-info" })
+            </td>
+            <td>
+                @using (@Html.BeginForm("StergeClient", "Tehnician", new { cod_client = item.id, cod_utilizator = item.id_Utilizator }))
+                {
+                    <input type="submit" class="btn btn-danger" value="Sterge" onclick="return confirm('Stergeti clientul?');" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>
